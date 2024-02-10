@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\HomeController;
+use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,12 +20,16 @@ use Illuminate\Support\Facades\Route;
 
 
 // admin
-Route::get('/administrator' , [AdminController::class , 'show']);
+Route::get('/login' , [AdminController::class , 'login'])->name('login');
+Route::middleware('auth')->get('/administrator' , [AdminController::class , 'show']);
 Route::get('/administrator/blog' , [BlogController::class , 'index']);
 Route::get('/administrator/blog/create' , [BlogController::class , 'create']);
 Route::post('/administrator/blog/store' , [BlogController::class , 'store']);
 Route::get('/blog/{blog}/edit' , [BlogController::class , 'edit']);
 Route::patch('/blog/{blog}/update' , [BlogController::class , 'update']);
+
+
+
 
 
 
